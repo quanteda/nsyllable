@@ -6,6 +6,8 @@ Authors@R: c(
     person("Kenneth", "Benoit", email = "kbenoit@lse.ac.uk", role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-0797-564X"))
     )
 License: GPL-3
+Depends:
+    R (>= 2.10)
 Imports:
     quanteda,
     stringi

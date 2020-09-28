@@ -50,18 +50,12 @@
 #' # tokens
 #' txt <- c(doc1 = "This is an example sentence.",
 #'          doc2 = "Another of two sample sentences.")
-#' nsyllable(tokens(txt, remove_punct = TRUE))
+#' nsyllable(quanteda::tokens(txt, remove_punct = TRUE))
 #' # punctuation is not counted
-#' nsyllable(tokens(txt), use.names = TRUE)
+#' nsyllable(quanteda::tokens(txt), use.names = TRUE)
 nsyllable <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
                       use.names = FALSE) {
     UseMethod("nsyllable")
-}
-
-#' @export
-nsyllable.default <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
-                              use.names = FALSE) {
-    stop(friendly_class_undefined_message(class(x), "nsyllable"))
 }
 
 #' @rdname nsyllable
@@ -70,7 +64,7 @@ nsyllable.default <- function(x, syllable_dictionary = quanteda::data_int_syllab
 nsyllable.character <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
                                 use.names = FALSE) { 
     # look up syllables
-    result <- syllable_dictionary[char_tolower(x, keep_acronyms = FALSE)]
+    result <- syllable_dictionary[quanteda::char_tolower(x, keep_acronyms = FALSE)]
     # keep or discard names
     if (use.names) {
         names(result) <- x
@@ -100,7 +94,7 @@ nsyllable.character <- function(x, syllable_dictionary = quanteda::data_int_syll
 #' @export
 nsyllable.tokens <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
                              use.names = FALSE) { 
-    types <- types(x)
+    types <- quanteda::types(x)
     if (attr(x, 'padding')) {
         vocab_sylls <- nsyllable(c("", types), use.names = use.names)
         lapply(unclass(x), function(y) vocab_sylls[y + 1]) 
