@@ -1,0 +1,21 @@
+Package: nsyllable
+Version: 0.10
+Title: Syllable counter
+Description: Add more description here.
+Authors@R: c( 
+    person("Kenneth", "Benoit", email = "kbenoit@lse.ac.uk", role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-0797-564X"))
+    )
+License: GPL-3
+Imports:
+    quanteda,
+    stringi
+Suggests:
+    knitr
+URL: https://github.com/quanteda/nsyllable
+Encoding: UTF-8
+BugReports: https://github.com/quanteda/nsyllable/issues
+LazyData: TRUE
+VignetteBuilder: knitr
+Language: en-GB
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)

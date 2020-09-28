@@ -1,0 +1,40 @@
+---
+output: github_document
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  fig.path = "man/images/"
+)
+```
+```{r echo=FALSE, results="hide", message=FALSE}
+library("badger")
+```
+
+# nsyllable
+
+<!-- badges: start -->
+[![CRAN Version](https://www.r-pkg.org/badges/version/quanteda)](https://CRAN.R-project.org/package=quanteda)
+`r badge_devel("quanteda/quanteda", "royalblue")`
+[![Downloads](https://cranlogs.r-pkg.org/badges/quanteda)](https://CRAN.R-project.org/package=quanteda)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/quanteda?color=orange)](https://CRAN.R-project.org/package=quanteda)
+[![R build status](https://github.com/quanteda/quanteda/workflows/R-CMD-check/badge.svg)](https://github.com/quanteda/quanteda/actions)
+[![codecov](https://codecov.io/gh/quanteda/quanteda/branch/master/graph/badge.svg)](https://codecov.io/gh/quanteda/quanteda) [![DOI](https://zenodo.org/badge/5424649.svg)](https://zenodo.org/badge/latestdoi/5424649)
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00774/status.svg)](https://doi.org/10.21105/joss.00774)
+<!-- badges: end -->
+
+## About
+
+Describe here
+
+## How to Install
+
+Or for the latest development version:
+```{r eval = FALSE}
+# devtools package required to install quanteda from Github 
+devtools::install_github("kbenoit/nsyllable") 
+```
+
+
