@@ -47,23 +47,25 @@ nsyllable <- function(x, syllable_dictionary = nsyllable::data_int_syllables,
 }
 
 #' @rdname nsyllable
-#' @importFrom stringi stri_trans_tolower stri_count_regex
 #' @noRd
 #' @export
 nsyllable.character <- function(x, syllable_dictionary = nsyllable::data_int_syllables, 
                                 use.names = FALSE) { 
     # look up syllables
-    result <- syllable_dictionary[stri_trans_tolower(x)]
+    result <- syllable_dictionary[tolower(x)]
+    # count vowels if the word did not match the syllable dictionary
+    result[is.na(result)] <-
+        sapply(gregexpr("[aeiouy]+", x[is.na(result)]), 
+               function(y) length(attr(y, "match.length")))
+    # so we don't words with no vowels as having syllables
+    result[which(result == 0)] <- NA
+
     # keep or discard names
     if (use.names) {
         names(result) <- x
     } else {
         result <- unname(result)
     }
-    # count vowels if the word did not match the syllable dictionary
-    result[is.na(result)] <- 
-        stri_count_regex(x[is.na(result)], "[aeiouy]+", case_insensitive = TRUE)
-    # so we don't words with no vowels as having syllables
-    result[which(result == 0)] <- NA
+    
     result
 }

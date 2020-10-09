@@ -2,5 +2,3 @@
 
 S3method(nsyllable,character)
 export(nsyllable)
-importFrom(stringi,stri_count_regex)
-importFrom(stringi,stri_trans_tolower)

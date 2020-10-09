@@ -1,5 +1,5 @@
 Package: nsyllable
-Version: 0.10
+Version: 0.20
 Title: Syllable counter
 Description: Add more description here.
 Authors@R: c( 
@@ -8,8 +8,6 @@ Authors@R: c(
 License: GPL-3
 Depends:
     R (>= 2.10)
-Imports:
-    stringi
 Suggests:
     knitr
 URL: https://github.com/quanteda/nsyllable
