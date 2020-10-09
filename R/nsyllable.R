@@ -10,36 +10,30 @@
 #'   For any word not in the dictionary, the syllable count is estimated by 
 #'   counting vowel clusters.
 #'   
-#'   `data_int_syllables` is a quanteda-supplied data object consisting of a 
+#'   `data_int_syllables` is a data object consisting of a 
 #'   named numeric vector of syllable counts for the words used as names.  This 
 #'   is the default object used to count English syllables.  This object that 
 #'   can be accessed directly, but we strongly encourage you to access it only 
 #'   through the `nsyllable()` wrapper function.
 #'   
-#' @param x character vector or `tokens` object  whose 
+#' @param x character vector whose 
 #'   syllables will be counted.  This will count all syllables in a character 
 #'   vector without regard to separating tokens, so it is recommended that x be 
 #'   individual terms.
 #' @param syllable_dictionary optional named integer vector of syllable counts where 
 #'   the names are lower case tokens.  When set to `NULL` (default), then 
-#'   the function will use the quanteda data object `data_int_syllables`, an 
+#'   the function will use the data object `data_int_syllables`, an 
 #'   English pronunciation dictionary from CMU.
 #' @param use.names logical; if `TRUE`, assign the tokens as the names of 
 #' the syllable count vector
 #'   
 #' @return If `x` is a character vector, a named numeric vector of the 
-#'   counts of the syllables in each element.  If `x` is a [tokens]
-#'   object, return a list of syllable counts where each list element corresponds
-#'   to the tokens in a document.
-#' @note All tokens are automatically converted to lowercase to perform the
-#'   matching with the syllable dictionary, so there is no need to perform this
-#'   step prior to calling `nsyllable()`.
-#'
-#'   `nsyllable()` only works reliably for English, as the only syllable count
-#'   dictionary we could find is the freely available CMU pronunciation
-#'   dictionary at `http://www.speech.cs.cmu.edu/cgi-bin/cmudict`.  If you
-#'   have a dictionary for another language, please email the package
-#'   maintainer as we would love to include it.
+#'   counts of the syllables in each element.
+#' @note `nsyllable()` only works reliably for English, as the only syllable
+#'   count dictionary we could find is the freely available CMU pronunciation
+#'   dictionary at `http://www.speech.cs.cmu.edu/cgi-bin/cmudict`.  If you have
+#'   a dictionary for another language, please email the package maintainer as
+#'   we would love to include it.
 #' @name nsyllable
 #' @export
 #' @examples
@@ -47,24 +41,19 @@
 #' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious", 
 #'             "Brexit", "Administration"), use.names = TRUE)
 #' 
-#' # tokens
-#' txt <- c(doc1 = "This is an example sentence.",
-#'          doc2 = "Another of two sample sentences.")
-#' nsyllable(quanteda::tokens(txt, remove_punct = TRUE))
-#' # punctuation is not counted
-#' nsyllable(quanteda::tokens(txt), use.names = TRUE)
-nsyllable <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
+nsyllable <- function(x, syllable_dictionary = nsyllable::data_int_syllables, 
                       use.names = FALSE) {
     UseMethod("nsyllable")
 }
 
 #' @rdname nsyllable
+#' @importFrom stringi stri_trans_tolower stri_count_regex
 #' @noRd
 #' @export
-nsyllable.character <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
+nsyllable.character <- function(x, syllable_dictionary = nsyllable::data_int_syllables, 
                                 use.names = FALSE) { 
     # look up syllables
-    result <- syllable_dictionary[quanteda::char_tolower(x, keep_acronyms = FALSE)]
+    result <- syllable_dictionary[stri_trans_tolower(x)]
     # keep or discard names
     if (use.names) {
         names(result) <- x
@@ -73,33 +62,8 @@ nsyllable.character <- function(x, syllable_dictionary = quanteda::data_int_syll
     }
     # count vowels if the word did not match the syllable dictionary
     result[is.na(result)] <- 
-        stringi::stri_count_regex(x[is.na(result)], "[aeiouy]+", case_insensitive = TRUE)
+        stri_count_regex(x[is.na(result)], "[aeiouy]+", case_insensitive = TRUE)
     # so we don't words with no vowels as having syllables
     result[which(result == 0)] <- NA
     result
-}
-
-
-#' @rdname nsyllable
-#' @noRd
-#' @examples 
-#' \dontshow{
-#' txt <- c(one = "super freakily yes",
-#'          two = "merrily all go aerodynamic")
-#' toks <- tokenize(txt)
-#' toksh <- tokens(txt)
-#' nsyllable(toks)
-#' nsyllable(toksh)
-#' }
-#' @export
-nsyllable.tokens <- function(x, syllable_dictionary = quanteda::data_int_syllables, 
-                             use.names = FALSE) { 
-    types <- quanteda::types(x)
-    if (attr(x, 'padding')) {
-        vocab_sylls <- nsyllable(c("", types), use.names = use.names)
-        lapply(unclass(x), function(y) vocab_sylls[y + 1]) 
-    } else {
-        vocab_sylls <- nsyllable(types, use.names = use.names)
-        lapply(unclass(x), function(y) vocab_sylls[y]) 
-    }
 }
