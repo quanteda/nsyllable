@@ -9,7 +9,6 @@ License: GPL-3
 Depends:
     R (>= 2.10)
 Imports:
-    quanteda,
     stringi
 Suggests:
     knitr

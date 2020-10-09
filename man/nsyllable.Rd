@@ -6,19 +6,19 @@
 \usage{
 nsyllable(
   x,
-  syllable_dictionary = quanteda::data_int_syllables,
+  syllable_dictionary = nsyllable::data_int_syllables,
   use.names = FALSE
 )
 }
 \arguments{
-\item{x}{character vector or \code{tokens} object  whose
+\item{x}{character vector whose
 syllables will be counted.  This will count all syllables in a character
 vector without regard to separating tokens, so it is recommended that x be
 individual terms.}
 
 \item{syllable_dictionary}{optional named integer vector of syllable counts where
 the names are lower case tokens.  When set to \code{NULL} (default), then
-the function will use the quanteda data object \code{data_int_syllables}, an
+the function will use the data object \code{data_int_syllables}, an
 English pronunciation dictionary from CMU.}
 
 \item{use.names}{logical; if \code{TRUE}, assign the tokens as the names of
@@ -26,9 +26,7 @@ the syllable count vector}
 }
 \value{
 If \code{x} is a character vector, a named numeric vector of the
-counts of the syllables in each element.  If \code{x} is a \link{tokens}
-object, return a list of syllable counts where each list element corresponds
-to the tokens in a document.
+counts of the syllables in each element.
 }
 \description{
 Returns a count of the number of syllables in texts. For English
@@ -37,32 +35,22 @@ dictionary, from the default syllable dictionary \code{data_int_syllables}.
 For any word not in the dictionary, the syllable count is estimated by
 counting vowel clusters.
 
-\code{data_int_syllables} is a quanteda-supplied data object consisting of a
+\code{data_int_syllables} is a data object consisting of a
 named numeric vector of syllable counts for the words used as names.  This
 is the default object used to count English syllables.  This object that
 can be accessed directly, but we strongly encourage you to access it only
 through the \code{nsyllable()} wrapper function.
 }
 \note{
-All tokens are automatically converted to lowercase to perform the
-matching with the syllable dictionary, so there is no need to perform this
-step prior to calling \code{nsyllable()}.
-
-\code{nsyllable()} only works reliably for English, as the only syllable count
-dictionary we could find is the freely available CMU pronunciation
-dictionary at \verb{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.  If you
-have a dictionary for another language, please email the package
-maintainer as we would love to include it.
+\code{nsyllable()} only works reliably for English, as the only syllable
+count dictionary we could find is the freely available CMU pronunciation
+dictionary at \verb{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.  If you have
+a dictionary for another language, please email the package maintainer as
+we would love to include it.
 }
 \examples{
 # character
 nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious", 
             "Brexit", "Administration"), use.names = TRUE)
 
-# tokens
-txt <- c(doc1 = "This is an example sentence.",
-         doc2 = "Another of two sample sentences.")
-nsyllable(quanteda::tokens(txt, remove_punct = TRUE))
-# punctuation is not counted
-nsyllable(quanteda::tokens(txt), use.names = TRUE)
 }
