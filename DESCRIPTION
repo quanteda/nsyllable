@@ -3,7 +3,9 @@ Version: 0.90
 Title: Count syllables in character vectors
 Description: Counts syllables in character vectors for English words.  Imputes syllables as the number of vowel sequences for words not found.  
 Authors@R: c( 
-    person("Kenneth", "Benoit", email = "kbenoit@lse.ac.uk", role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-0797-564X"))
+    person("Kenneth", "Benoit", email = "kbenoit@lse.ac.uk", role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-0797-564X")),
+    person("Carnegie Mellon University", email = "air+cmudict@cs.cmu.edu", role = "cph",
+           comment = "CMU Pronunciation Dictionary (c) 1993-2015")
     )
 License: GPL-3
 Depends:
