@@ -1,7 +1,7 @@
 Package: nsyllable
-Version: 0.20
-Title: Syllable counter
-Description: Add more description here.
+Version: 0.90
+Title: Count syllables in character vectors
+Description: Counts syllables in character vectors for English words.  Imputes syllables as the number of vowel sequences for words not found.  
 Authors@R: c( 
     person("Kenneth", "Benoit", email = "kbenoit@lse.ac.uk", role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-0797-564X"))
     )
