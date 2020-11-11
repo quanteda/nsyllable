@@ -26,3 +26,36 @@ test_that("dipthong estimation works for non-dictionary words", {
       c(1L, 2L)
   )
 })
+
+test_that("nsyllable works for unknown words", {
+  expect_identical(
+    nsyllable(c("notword", "NOTWORD")),
+    c(2L, 2L)
+  )
+})
+
+test_that("nsyllable works for different use.names arguments", {
+  expect_identical(
+    nsyllable(c("testing", "Reagan", "WHOA"), use.names = TRUE),
+    c(testing = 2L, Reagan = 2L, WHOA = 1L)
+  )
+  expect_identical(
+    nsyllable(c("testing", "Reagan", "WHOA"), use.names = FALSE),
+    c(2L, 2L, 1L)
+  )
+})
+
+test_that("nsyllable works for words that include punctuation", {
+  expect_identical(
+    nsyllable(c("#rstats", "@justinbieber")),
+    c(1L, 4L)
+  )
+  expect_identical(
+    nsyllable(c("#rstats", "@justinbieber"), use.names = TRUE),
+    c("#rstats" = 1L, "@justinbieber" = 4L)
+  )
+  expect_identical(
+    nsyllable(c("!!!", "\U0001F600", "Hooray!!\U0001F600")),
+    c(NA, NA, 2L)
+  )
+})
