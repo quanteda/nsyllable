@@ -1,33 +1,39 @@
-#' `data_int_syllables` provides an English-language syllables dictionary;
-#' it is an integer vector whose element names correspond to English words.
+#' Syllable counts of English words
+#'
+#' A named integer vector of syllable counts for English words. Based on a
+#' pronunciation dictionary for North American English that contains over
+#' 134,000 words and their pronunciations, from the [Carnegie Mellon University
+#' Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
+#' @note
+#'   `data_int_syllables` is a data object consisting of a
+#'   named numeric vector of syllable counts for the words used as names.  This
+#'   is the default object used to count English syllables.  This object that
+#'   can be accessed directly, but we strongly encourage you to access it only
+#'   through the [nsyllable()] wrapper function.
+#' @source <http://www.speech.cs.cmu.edu/cgi-bin/cmudict>
 "data_int_syllables"
 
+
 #' Count syllables in a text
-#' 
+#'
 #' @description Returns a count of the number of syllables in texts. For English
 #'   words, the syllable count is exact and looked up from the CMU pronunciation
-#'   dictionary, from the default syllable dictionary `data_int_syllables`. 
-#'   For any word not in the dictionary, the syllable count is estimated by 
+#'   dictionary, from the default syllable dictionary `data_int_syllables`.
+#'   For any word not in the dictionary, the syllable count is estimated by
 #'   counting vowel clusters.
-#'   
-#'   `data_int_syllables` is a data object consisting of a 
-#'   named numeric vector of syllable counts for the words used as names.  This 
-#'   is the default object used to count English syllables.  This object that 
-#'   can be accessed directly, but we strongly encourage you to access it only 
-#'   through the `nsyllable()` wrapper function.
-#'   
-#' @param x character vector whose 
-#'   syllables will be counted.  This will count all syllables in a character 
-#'   vector without regard to separating tokens, so it is recommended that x be 
+#'
+#' @param x character vector whose
+#'   syllables will be counted.  This will count all syllables in a character
+#'   vector without regard to separating tokens, so it is recommended that x be
 #'   individual terms.
-#' @param syllable_dictionary optional named integer vector of syllable counts where 
-#'   the names are lower case tokens.  When set to `NULL` (default), then 
-#'   the function will use the data object `data_int_syllables`, an 
+#' @param syllable_dictionary optional named integer vector of syllable counts where
+#'   the names are lower case tokens.  When set to `NULL` (default), then
+#'   the function will use the data object `data_int_syllables`, an
 #'   English pronunciation dictionary from CMU.
-#' @param use.names logical; if `TRUE`, assign the tokens as the names of 
+#' @param use.names logical; if `TRUE`, assign the tokens as the names of
 #' the syllable count vector
-#'   
-#' @return If `x` is a character vector, a named numeric vector of the 
+#'
+#' @return If `x` is a character vector, a named numeric vector of the
 #'   counts of the syllables in each element.
 #' @note `nsyllable()` only works reliably for English, as the only syllable
 #'   count dictionary we could find is the freely available CMU pronunciation
@@ -38,10 +44,10 @@
 #' @export
 #' @examples
 #' # character
-#' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious", 
+#' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
 #'             "Brexit", "Administration"), use.names = TRUE)
-#' 
-nsyllable <- function(x, syllable_dictionary = nsyllable::data_int_syllables, 
+#'
+nsyllable <- function(x, syllable_dictionary = nsyllable::data_int_syllables,
                       use.names = FALSE) {
     UseMethod("nsyllable")
 }
@@ -49,18 +55,18 @@ nsyllable <- function(x, syllable_dictionary = nsyllable::data_int_syllables,
 #' @rdname nsyllable
 #' @noRd
 #' @export
-nsyllable.character <- function(x, syllable_dictionary = nsyllable::data_int_syllables, 
-                                use.names = FALSE) { 
+nsyllable.character <- function(x, syllable_dictionary = nsyllable::data_int_syllables,
+                                use.names = FALSE) {
     # look up syllables
     result <- syllable_dictionary[tolower(x)]
-    
+
     # count vowels if the word did not match the syllable dictionary
     if (any(is.na(result))) {
         result[is.na(result)] <-
-            sapply(gregexpr("[aeiouy]+", x[is.na(result)]), 
+            sapply(gregexpr("[aeiouy]+", x[is.na(result)]),
                    function(y) length(attr(y, "match.length")))
     }
-    
+
     # so we don't words with no vowels as having syllables
     result[which(result == 0)] <- NA
 
@@ -70,6 +76,6 @@ nsyllable.character <- function(x, syllable_dictionary = nsyllable::data_int_syl
     } else {
         result <- unname(result)
     }
-    
+
     result
 }

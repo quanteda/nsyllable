@@ -34,12 +34,6 @@ words, the syllable count is exact and looked up from the CMU pronunciation
 dictionary, from the default syllable dictionary \code{data_int_syllables}.
 For any word not in the dictionary, the syllable count is estimated by
 counting vowel clusters.
-
-\code{data_int_syllables} is a data object consisting of a
-named numeric vector of syllable counts for the words used as names.  This
-is the default object used to count English syllables.  This object that
-can be accessed directly, but we strongly encourage you to access it only
-through the \code{nsyllable()} wrapper function.
 }
 \note{
 \code{nsyllable()} only works reliably for English, as the only syllable
@@ -50,7 +44,7 @@ we would love to include it.
 }
 \examples{
 # character
-nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious", 
+nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
             "Brexit", "Administration"), use.names = TRUE)
 
 }

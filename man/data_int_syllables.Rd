@@ -3,16 +3,26 @@
 \docType{data}
 \name{data_int_syllables}
 \alias{data_int_syllables}
-\title{\code{data_int_syllables} provides an English-language syllables dictionary;
-it is an integer vector whose element names correspond to English words.}
+\title{Syllable counts of English words}
 \format{
 An object of class \code{integer} of length 133245.
+}
+\source{
+\url{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}
 }
 \usage{
 data_int_syllables
 }
 \description{
-\code{data_int_syllables} provides an English-language syllables dictionary;
-it is an integer vector whose element names correspond to English words.
+A named integer vector of syllable counts for English words. Based on a
+pronunciation dictionary for North American English that contains over
+134,000 words and their pronunciations, from the \href{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}{Carnegie Mellon University Pronouncing Dictionary}.
+}
+\note{
+\code{data_int_syllables} is a data object consisting of a
+named numeric vector of syllable counts for the words used as names.  This
+is the default object used to count English syllables.  This object that
+can be accessed directly, but we strongly encourage you to access it only
+through the \code{\link[=nsyllable]{nsyllable()}} wrapper function.
 }
 \keyword{datasets}
