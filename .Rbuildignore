@@ -28,7 +28,6 @@ __MACOSX
 ^index.(html|md|Rmd)$
 ^paper
 LICENSE
-quanteda.pdf
 ^\.lintr$
-^tests/data_creation/
 ^\.github$
+^data/sources/

@@ -1,0 +1,18 @@
+#' Syllable counts of English words
+#'
+#' A named integer vector of syllable counts for English words. Based on a
+#' pronunciation dictionary for North American English that contains over
+#' 134,000 words and their pronunciations, from the [Carnegie Mellon University
+#' Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
+#'
+#' @note
+#'   `data_int_syllables` is a data object consisting of a named numeric vector
+#'   of syllable counts for the words used as names.  This is the default object
+#'   used to count English syllables.  For words with multiple pronunciation
+#'   variants, we use the first entry.
+#'
+#'   This object that can be accessed directly, but we strongly encourage you to
+#'   access it only through the [nsyllable()] wrapper function.
+#' @source Version 0.7b of the CMU Pronouncing Dictionary.  See
+#'   <http://www.speech.cs.cmu.edu/cgi-bin/cmudict>.
+"data_int_syllables"
