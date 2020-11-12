@@ -16,12 +16,13 @@ status](https://github.com/quanteda/nsyllable/workflows/R-CMD-check/badge.svg)](
 
 ## About
 
-Counts syllables in character vectors for English words, based on the
-[Carnegie Mellon University Pronouncing
-Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict). Imputes
-syllables as the number of vowel sequences for words not found.
+Counts syllables in character vectors. For English, this looks up
+syllables from the [Carnegie Mellon University Pronouncing
+Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict), or guesses
+the syllables as the number of vowel sequences for words not found.
+User-supplied syllable word lists are also supported.
 
-We hope to add more languages soon.
+We hope to built-in support for additional languages soon.
 
 ## How to Install
 
@@ -32,17 +33,51 @@ Currently, **nsyllable** is currently only on GitHub. To install:
 devtools::install_github("quanteda/nsyllable") 
 ```
 
-## Demonstration
+## Usage
+
+`nsyllable()` counts the syllables in each element of a character
+vector, and returns the integer vector of the syllable counts. If
+`use.names = TRUE`, then the output vector is named. The default (and
+currently, only) language implemented is English.
 
 ``` r
 library("nsyllable")
 
 charvec <- c("testing", "Aachen", "supercalifragilisticexpialidocious")
 nsyllable(charvec)
-## [1]  2  2 13
+## [1]  2  2 14
 nsyllable(charvec, use.names = TRUE)
 ##                            testing                             Aachen 
 ##                                  2                                  2 
 ## supercalifragilisticexpialidocious 
-##                                 13
+##                                 14
+```
+
+User-supplied dictionaries can also be used, and these will override the
+`language` argument. Below, “excellent” is still (correctly) counted,
+but not because it looked up the results in the English dictionary, but
+because it counted the vowel sequences. This gets “noel” wrong, however.
+
+``` r
+nsyllable(c("excellent", "noel", "film"), use.names = TRUE)
+## excellent      noel      film 
+##         3         2         1
+
+# redefine the syllables as it's pronounced in parts of Ireland
+mydict <- c("film" = 2L)
+# looks up "excellent" and does the vowel count
+nsyllable(c("excellent", "noel", "film"), syllable_dictionary = mydict, use.names = TRUE)
+## excellent      noel      film 
+##         3         1         2
+```
+
+To not use the English dictionary and count only vowel sequences, set
+`syllable_dictionary` to `NULL`. This will likely to be a good
+approximation for many Western languages.
+
+``` r
+nsyllable(c("Dies", "ist", "eine", "Demonstration"), syllable_dictionary = NULL,
+          use.names = TRUE)
+##          Dies           ist          eine Demonstration 
+##             1             1             2             4
 ```
