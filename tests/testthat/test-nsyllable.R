@@ -59,3 +59,47 @@ test_that("nsyllable works for words that include punctuation", {
     c(NA, NA, 2L)
   )
 })
+
+test_that("language argument works", {
+  expect_identical(
+    nsyllable("testing", language = "en", use.names = TRUE),
+    c(testing = 2L)
+  )
+  expect_error(
+    nsyllable("testing", language = "xx", use.names = TRUE),
+    "\'arg\' should be one of \"en\""
+  )
+  expect_identical(
+    nsyllable("testing", language = NULL, use.names = TRUE),
+    c(testing = 2L)
+  )
+})
+
+test_that("syllable_dictionary argument works", {
+  sdict <- c(testing = 10L, other = 2L)
+  expect_identical(
+    nsyllable(c("testing", "xray"), syllable_dictionary = sdict, use.names = TRUE),
+    c(testing = 10L, xray = 1L)
+  )
+  expect_identical(
+    nsyllable(c("testing", "xray"), language = "en", syllable_dictionary = sdict, use.names = TRUE),
+    c(testing = 10L, xray = 1L)
+  )
+
+  sdict2 <- c(testing = 2, other = 0)
+  expect_error(
+    nsyllable("testing", syllable_dictionary = sdict2, use.names = TRUE),
+    "syllable_dictionary must be a named integer vector"
+  )
+  
+  sdict3 <- c(testing = 2L, 0L)
+  expect_error(
+    nsyllable("testing", syllable_dictionary = sdict3, use.names = TRUE),
+    "syllable_dictionary must be a named integer vector"
+  )
+
+  expect_error(
+    nsyllable("testing", syllable_dictionary = integer(0), use.names = TRUE),
+    "syllable_dictionary must be a named integer vector"
+  )
+})
