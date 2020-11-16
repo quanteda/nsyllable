@@ -6,7 +6,7 @@
 #' Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
 #'
 #' @note
-#'   `data_int_syllables` is a data object consisting of a named numeric vector
+#'   `data_syllables_en` is a data object consisting of a named numeric vector
 #'   of syllable counts for the words used as names.  This is the default object
 #'   used to count English syllables.  For words with multiple pronunciation
 #'   variants, we use the first entry.
@@ -15,4 +15,4 @@
 #'   access it only through the [nsyllable()] wrapper function.
 #' @source Version 0.7b of the CMU Pronouncing Dictionary.  See
 #'   <http://www.speech.cs.cmu.edu/cgi-bin/cmudict>.
-"data_int_syllables"
+"data_syllables_en"

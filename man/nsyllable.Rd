@@ -4,11 +4,7 @@
 \alias{nsyllable}
 \title{Count syllables in a text}
 \usage{
-nsyllable(
-  x,
-  syllable_dictionary = nsyllable::data_int_syllables,
-  use.names = FALSE
-)
+nsyllable(x, language = "en", syllable_dictionary = NULL, use.names = FALSE)
 }
 \arguments{
 \item{x}{character vector whose
@@ -16,17 +12,21 @@ syllables will be counted.  This will count all syllables in a character
 vector without regard to separating tokens, so it is recommended that x be
 individual terms.}
 
-\item{syllable_dictionary}{optional named integer vector of syllable counts where
-the names are lower case tokens.  When set to \code{NULL} (default), then
-the function will use the data object \code{data_int_syllables}, an
-English pronunciation dictionary from CMU.}
+\item{language}{specify the language for syllable counts by \href{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}{ISO 639-1} code. The
+default is English, using the data object \code{\link{data_syllables_en}}, an English
+pronunciation dictionary from CMU.}
 
-\item{use.names}{logical; if \code{TRUE}, assign the tokens as the names of
-the syllable count vector}
+\item{syllable_dictionary}{optional named integer vector of syllable counts
+where the names are lower case tokens.  This can be used to override the
+language setting, when set to \code{NULL} (the default).  If a syllable
+dictionary is supplied, this will override the \code{language} argument.}
+
+\item{use.names}{logical; if \code{TRUE}, assign the tokens as the names of the
+syllable count vector}
 }
 \value{
-If \code{x} is a character vector, a named numeric vector of the
-counts of the syllables in each element.
+an integer vector of the counts of the syllables in each element,
+named with the element if \code{use.names = TRUE}
 }
 \description{
 Returns a count of the number of syllables in texts. For English
@@ -34,13 +34,6 @@ words, the syllable count is exact and looked up from the CMU pronunciation
 dictionary, from the default syllable dictionary \code{data_int_syllables}.
 For any word not in the dictionary, the syllable count is estimated by
 counting vowel clusters.
-}
-\note{
-\code{nsyllable()} only works reliably for English, as the only syllable
-count dictionary we could find is the freely available CMU pronunciation
-dictionary at \verb{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.  If you have
-a dictionary for another language, please email the package maintainer as
-we would love to include it.
 }
 \examples{
 # character
