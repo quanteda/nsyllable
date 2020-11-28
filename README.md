@@ -22,15 +22,21 @@ Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict), or guesses
 the syllables as the number of vowel sequences for words not found.
 User-supplied syllable word lists are also supported.
 
-We hope to built-in support for additional languages soon.
+We hope to add lookup tables for additional languages in the future.
 
 ## How to Install
 
-Currently, **nsyllable** is currently only on GitHub. To install:
+From CRAN:
 
 ``` r
-# devtools package required to install nsyllable from Github 
-devtools::install_github("quanteda/nsyllable") 
+install.packages("nsyllable")
+```
+
+From GitHub:
+
+``` r
+# remotes package required to install nsyllable from Github 
+remotes::install_github("quanteda/nsyllable") 
 ```
 
 ## Usage

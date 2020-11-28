@@ -1,5 +1,5 @@
 Package: nsyllable
-Version: 0.90
+Version: 1.0
 Title: Count Syllables in Character Vectors
 Description: Counts syllables in character vectors for English words.  Imputes syllables as the number of vowel sequences for words not found.  
 Authors@R: c( 
