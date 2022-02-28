@@ -1,5 +1,5 @@
 Package: nsyllable
-Version: 1.0
+Version: 1.0.1
 Title: Count Syllables in Character Vectors
 Description: Counts syllables in character vectors for English words.  Imputes syllables as the number of vowel sequences for words not found.  
 Authors@R: c( 
@@ -19,5 +19,5 @@ Encoding: UTF-8
 BugReports: https://github.com/quanteda/nsyllable/issues
 LazyData: TRUE
 Language: en-GB
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
