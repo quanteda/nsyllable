@@ -3,7 +3,7 @@
 #' A named integer vector of syllable counts for English words. Based on a
 #' pronunciation dictionary for North American English that contains over
 #' 134,000 words and their pronunciations, from the [Carnegie Mellon University
-#' Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
+#' Pronouncing Dictionary](https://github.com/cmusphinx/cmudict).
 #'
 #' @note
 #'   `data_syllables_en` is a data object consisting of a named numeric vector

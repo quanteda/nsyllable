@@ -67,7 +67,7 @@ test_that("language argument works", {
   )
   expect_error(
     nsyllable("testing", language = "xx", use.names = TRUE),
-    "should be one of"
+    "should be"
   )
   expect_identical(
     nsyllable("testing", language = NULL, use.names = TRUE),

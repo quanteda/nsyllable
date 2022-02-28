@@ -17,7 +17,7 @@ data_syllables_en
 \description{
 A named integer vector of syllable counts for English words. Based on a
 pronunciation dictionary for North American English that contains over
-134,000 words and their pronunciations, from the \href{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}{Carnegie Mellon University Pronouncing Dictionary}.
+134,000 words and their pronunciations, from the \href{https://github.com/cmusphinx/cmudict}{Carnegie Mellon University Pronouncing Dictionary}.
 }
 \note{
 \code{data_syllables_en} is a data object consisting of a named numeric vector
