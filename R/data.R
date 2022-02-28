@@ -14,5 +14,5 @@
 #'   This object that can be accessed directly, but we strongly encourage you to
 #'   access it only through the [nsyllable()] wrapper function.
 #' @source Version 0.7b of the CMU Pronouncing Dictionary.  See
-#'   <http://www.speech.cs.cmu.edu/cgi-bin/cmudict>.
+#'   <https://github.com/cmusphinx/cmudict>.
 "data_syllables_en"

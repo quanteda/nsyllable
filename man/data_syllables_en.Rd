@@ -9,7 +9,7 @@ An object of class \code{integer} of length 125698.
 }
 \source{
 Version 0.7b of the CMU Pronouncing Dictionary.  See
-\url{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.
+\url{https://github.com/cmusphinx/cmudict}.
 }
 \usage{
 data_syllables_en

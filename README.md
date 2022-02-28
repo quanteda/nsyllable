@@ -5,7 +5,7 @@
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/nsyllable)](https://CRAN.R-project.org/package=nsyllable)
-[![](https://img.shields.io/badge/devel%20version-1.0-royalblue.svg)](https://github.com/quanteda/nsyllable)
+[![](https://img.shields.io/badge/devel%20version-1.0.1-royalblue.svg)](https://github.com/quanteda/nsyllable)
 [![Downloads](https://cranlogs.r-pkg.org/badges/nsyllable)](https://CRAN.R-project.org/package=nsyllable)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/nsyllable?color=orange)](https://CRAN.R-project.org/package=nsyllable)

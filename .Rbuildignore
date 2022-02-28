@@ -31,3 +31,4 @@ LICENSE
 ^\.lintr$
 ^\.github$
 ^data/sources/
+^CRAN-SUBMISSION$

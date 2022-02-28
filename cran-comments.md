@@ -1,11 +1,11 @@
 # Submission notes
 
-First submission of this package, after splitting it from the quanteda package.
+Fix a test breaking on dev releases of R because of too exact a match to an error message.
 
 ## Test environments
 
-* local macOS 10.15.7, R 4.0.3
-* Ubuntu 18.04 LTS and 18.10, R 4.0.3
+* local macOS 12.2.1, R 4.1.2
+* Ubuntu 20.04 LTS, R 4.1.2
 * Windows release via devtools::check_win_release()
 * Windows devel via devtools::check_win_devel()
 
