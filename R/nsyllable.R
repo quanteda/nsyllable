@@ -43,7 +43,12 @@ nsyllable.character <- function(x, language = "en", syllable_dictionary = NULL,
     language <- match.arg(language)
 
     if (is.null(syllable_dictionary)) {
-        syllable_dictionary <- switch(language, en = nsyllable::data_syllables_en)
+        syllable_dictionary <- switch(
+            language,
+            en = nsyllable::data_syllables_en,
+            # return empty dictionary to avoid subsetting NULL
+            named_integer()
+        )
     } else {
         check_syllable_dictionary(syllable_dictionary)
     }
@@ -76,4 +81,10 @@ check_syllable_dictionary <- function(x) {
     if (is.null(x) || !length(x) || !is.integer(x) ||
         is.null(names(x)) || any(is.na(names(x))) || any(names(x) == ""))
         stop("syllable_dictionary must be a named integer vector", call. = FALSE)
+}
+
+named_integer <- function(length = 0L) {
+    x <- integer(length)
+    names(x) <- character(length)
+    x
 }
