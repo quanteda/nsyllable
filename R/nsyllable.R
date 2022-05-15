@@ -29,7 +29,9 @@
 #' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
 #'             "Brexit", "Administration"), use.names = TRUE)
 #'
-nsyllable <- function(x, language = "en", syllable_dictionary = NULL,
+nsyllable <- function(x,
+                      language = c("en", "pl"),
+                      syllable_dictionary = NULL,
                       use.names = FALSE) {
     UseMethod("nsyllable")
 }
@@ -37,7 +39,9 @@ nsyllable <- function(x, language = "en", syllable_dictionary = NULL,
 #' @rdname nsyllable
 #' @noRd
 #' @export
-nsyllable.character <- function(x, language = "en", syllable_dictionary = NULL,
+nsyllable.character <- function(x,
+                                language = c("en", "pl"),
+                                syllable_dictionary = NULL,
                                 use.names = FALSE) {
 
     language <- match.arg(language)
