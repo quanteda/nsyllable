@@ -43,8 +43,8 @@ remotes::install_github("quanteda/nsyllable")
 
 `nsyllable()` counts the syllables in each element of a character
 vector, and returns the integer vector of the syllable counts. If
-`use.names = TRUE`, then the output vector is named. The default (and
-currently, only) language implemented is English.
+`use.names = TRUE`, then the output vector is named. The default
+language implemented is English.
 
 ``` r
 library("nsyllable")
@@ -77,6 +77,8 @@ nsyllable(c("excellent", "noel", "film"), syllable_dictionary = mydict, use.name
 ##         3         1         2
 ```
 
+### With other languages
+
 To not use the English dictionary and count only vowel sequences, set
 `syllable_dictionary` to `NULL`. This will likely to be a good
 approximation for many Western languages.
@@ -86,4 +88,16 @@ nsyllable(c("Dies", "ist", "eine", "Demonstration"), syllable_dictionary = NULL,
           use.names = TRUE)
 ##          Dies           ist          eine Demonstration 
 ##             1             1             2             4
+```
+
+A separate algorithm for counting syllables is implemented for Polish,
+giving more accuracy than basic vowel sequence counting. The user might
+expect incorrect results for words with “au” and “eu” sequences, as
+their pronunciation is not consistent.
+
+``` r
+nsyllable(c("Ziemia", "wyszczekany", "miauczenie", "autobus", "kakao"),
+          language = "pl", use.names = TRUE)
+##      Ziemia wyszczekany  miauczenie     autobus       kakao 
+##           2           4           3           3           3
 ```
