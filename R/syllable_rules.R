@@ -1,13 +1,12 @@
 apply_syllable_rules <- function(x, language) {
-    switch(language,
-           pl = apply_pl_rules(x),
-           apply_default_rules(x)
+    pattern <- switch(
+        language,
+        pl = pl_syllable_pattern,
+        default_syllable_pattern
     )
-}
-
-apply_default_rules <- function(x) {
+    
     vapply(
-        gregexpr("[aeiouy]+", x, ignore.case = TRUE),
+        gregexpr(pattern, x, ignore.case = TRUE),
         function(match) {
             if (length(match) == 1 && match == -1)
                 NA_integer_
@@ -18,15 +17,5 @@ apply_default_rules <- function(x) {
     )
 }
 
-apply_pl_rules <- function(x) {
-    vapply(
-        gregexpr("i*([aeiouy])\\1*u*", x, ignore.case = TRUE),
-        function(match) {
-            if (length(match) == 1 && match == -1)
-                NA_integer_
-            else
-                length(match)
-        },
-        integer(1)
-    )
-}
+default_syllable_pattern <- "[aeiouy]+"
+pl_syllable_pattern <- "i*([aeiouy])\\1*u*"
