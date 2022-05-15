@@ -28,6 +28,8 @@
 #' # character
 #' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
 #'             "Brexit", "Administration"), use.names = TRUE)
+#' nsyllable(c("wiedza", "sylaba", "konstantynopolitańczykowianeczka"),
+#'             language = "pl", use.names = TRUE)
 #'
 nsyllable <- function(x,
                       language = c("en", "pl"),
