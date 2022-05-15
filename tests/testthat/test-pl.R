@@ -27,7 +27,7 @@ test_that("'au' and 'eu' groups are considered a single syllable by default", {
 })
 
 test_that("'au' and 'eu' are considered separate when at the border of a prefix", {
-    skip("not implemented")
+    skip("hard to implement")
     expect_identical(
         nsyllable(c("nieuk", "nausznik", "zauroczenie"), language = "pl"),
         c(2L, 3L, 5L)
@@ -35,7 +35,7 @@ test_that("'au' and 'eu' are considered separate when at the border of a prefix"
 })
 
 test_that("'au' and 'eu' are considered separate when at the border of a suffix", {
-    skip("not implemented")
+    skip("hard to implement")
     expect_identical(
         nsyllable(c("faryzeusz", "liceum"), language = "pl"),
         c(4L, 3L)
@@ -43,7 +43,7 @@ test_that("'au' and 'eu' are considered separate when at the border of a suffix"
 })
 
 test_that("'au' and 'eu' are considered separate in a few exceptions", {
-    skip("not implemented")
+    skip("the exceptions will have to be listed out (including non-lemma forms)")
     expect_identical(
         nsyllable(c("nauka", "naukowy", "laurka", "Zeus", "neutralne", "neutron"), language = "pl"),
         c(3L, 4L, 3L, 2L, 4L, 3L)
