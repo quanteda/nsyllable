@@ -52,16 +52,11 @@ nsyllable.character <- function(x, language = "en", syllable_dictionary = NULL,
     result <- syllable_dictionary[tolower(x)]
 
     # count vowels if the word did not match the syllable dictionary
-    if (any(is.na(result))) {
-        result[is.na(result)] <-
-            sapply(gregexpr("[aeiouy]+", x[is.na(result)], ignore.case = TRUE),
-                   function(y) {
-                       temp <- attr(y, "match.length")
-                       if (length(temp) == 1 && temp == -1)
-                           NA
-                       else
-                           length(attr(y, "match.length"))
-                   })
+    missing_result <- is.na(result)
+    if (any(missing_result)) {
+        result[missing_result] <- apply_syllable_rules(
+            x[missing_result], language = language
+        )
     }
 
     # so we don't words with no vowels as having syllables
