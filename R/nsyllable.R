@@ -28,8 +28,12 @@
 #' # character
 #' nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
 #'             "Brexit", "Administration"), use.names = TRUE)
+#' nsyllable(c("wiedza", "sylaba", "konstantynopolitańczykowianeczka"),
+#'             language = "pl", use.names = TRUE)
 #'
-nsyllable <- function(x, language = "en", syllable_dictionary = NULL,
+nsyllable <- function(x,
+                      language = c("en", "pl"),
+                      syllable_dictionary = NULL,
                       use.names = FALSE) {
     UseMethod("nsyllable")
 }
@@ -37,13 +41,20 @@ nsyllable <- function(x, language = "en", syllable_dictionary = NULL,
 #' @rdname nsyllable
 #' @noRd
 #' @export
-nsyllable.character <- function(x, language = "en", syllable_dictionary = NULL,
+nsyllable.character <- function(x,
+                                language = c("en", "pl"),
+                                syllable_dictionary = NULL,
                                 use.names = FALSE) {
 
     language <- match.arg(language)
 
     if (is.null(syllable_dictionary)) {
-        syllable_dictionary <- switch(language, en = nsyllable::data_syllables_en)
+        syllable_dictionary <- switch(
+            language,
+            en = nsyllable::data_syllables_en,
+            # return empty dictionary to avoid subsetting NULL
+            named_integer()
+        )
     } else {
         check_syllable_dictionary(syllable_dictionary)
     }
@@ -52,16 +63,11 @@ nsyllable.character <- function(x, language = "en", syllable_dictionary = NULL,
     result <- syllable_dictionary[tolower(x)]
 
     # count vowels if the word did not match the syllable dictionary
-    if (any(is.na(result))) {
-        result[is.na(result)] <-
-            sapply(gregexpr("[aeiouy]+", x[is.na(result)], ignore.case = TRUE),
-                   function(y) {
-                       temp <- attr(y, "match.length")
-                       if (length(temp) == 1 && temp == -1)
-                           NA
-                       else
-                           length(attr(y, "match.length"))
-                   })
+    missing_result <- is.na(result)
+    if (any(missing_result)) {
+        result[missing_result] <- apply_syllable_rules(
+            x[missing_result], language = language
+        )
     }
 
     # so we don't words with no vowels as having syllables
@@ -81,4 +87,10 @@ check_syllable_dictionary <- function(x) {
     if (is.null(x) || !length(x) || !is.integer(x) ||
         is.null(names(x)) || any(is.na(names(x))) || any(names(x) == ""))
         stop("syllable_dictionary must be a named integer vector", call. = FALSE)
+}
+
+named_integer <- function(length = 0L) {
+    x <- integer(length)
+    names(x) <- character(length)
+    x
 }

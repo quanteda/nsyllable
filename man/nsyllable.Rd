@@ -4,7 +4,12 @@
 \alias{nsyllable}
 \title{Count syllables in a text}
 \usage{
-nsyllable(x, language = "en", syllable_dictionary = NULL, use.names = FALSE)
+nsyllable(
+  x,
+  language = c("en", "pl"),
+  syllable_dictionary = NULL,
+  use.names = FALSE
+)
 }
 \arguments{
 \item{x}{character vector whose
@@ -39,5 +44,7 @@ counting vowel clusters.
 # character
 nsyllable(c("cat", "syllable", "supercalifragilisticexpialidocious",
             "Brexit", "Administration"), use.names = TRUE)
+nsyllable(c("wiedza", "sylaba", "konstantynopolitańczykowianeczka"),
+            language = "pl", use.names = TRUE)
 
 }
